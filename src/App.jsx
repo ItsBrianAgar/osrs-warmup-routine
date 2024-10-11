@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import WarmupList from "./component/WarmupList/WarmupList";
 import fetchDailyImage from "./utils/storageUnsplashImage";
+import { Helmet } from "react-helmet";
 // hooks
 import useLightEffect from "./hooks/useLightEffect";
+// assets
+import favicon from "./favicon.png";
 
 function App() {
-  const { lightRef, wrapperRef } = useLightEffect();
+  const { lightRef, wrapperRef } = useLightEffect(0.01); // Adjust this value to change the follow speed (lower = slower)
   const [backgroundImage, setBackgroundImage] = useState("");
 
   useEffect(() => {
@@ -19,6 +22,10 @@ function App() {
 
   return (
     <div className="App" style={{ backgroundImage: `url(${backgroundImage})` }}>
+      <Helmet>
+        <title>OSRS | Warmup Checklist</title>
+        <link rel="icon" href={favicon} type="image/x-icon" />
+      </Helmet>
       <main ref={wrapperRef} className="content-wrapper">
         <div ref={lightRef} className="light-effect"></div>
         <header className="page-header">
