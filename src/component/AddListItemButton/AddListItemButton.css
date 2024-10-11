@@ -1,0 +1,21 @@
+.add-list-item-button {
+  padding: 0.75rem 1.25rem;
+  background-color: rgba(220, 253, 255, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(220, 253, 255, 0.5);
+  color: #dcfdff;
+  margin: 1rem 0;
+  cursor: pointer;
+  transition: box-shadow 300ms ease, border 300ms ease, color 300ms ease,
+    background-color 300ms ease;
+}
+
+.add-list-item-button:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  background-color: rgba(210, 253, 255, 0.2);
+  border: 1px solid rgba(210, 253, 255, 0.6);
+  color: rgb(210, 253, 255);
+}
