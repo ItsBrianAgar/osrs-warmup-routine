@@ -3,7 +3,7 @@ const warmupList = [
   "Herb Run",
   "Hallowed Sepulchre x3",
   "Zulrah x3",
-  "Vardorvis x3",
+  "Duke x3",
   "Toa 300",
 ];
 
