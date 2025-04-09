@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import WarmupList from "./component/WarmupList/WarmupList";
+import PageTabs from "./component/PageTabs/PageTabs";
 import fetchDailyImage from "./utils/storageUnsplashImage";
 import { Helmet } from "react-helmet";
 // hooks
@@ -26,14 +27,17 @@ function App() {
         <title>OSRS | Warmup Checklist</title>
         <link rel="icon" href={favicon} type="image/x-icon" />
       </Helmet>
-      <main ref={wrapperRef} className="content-wrapper">
-        <div ref={lightRef} className="light-effect"></div>
-        <header className="page-header">
-          <h1 className="page-title">Warmup Checklist</h1>
-          <p className="page-description">Lock in!</p>
-        </header>
-        <WarmupList />
-      </main>
+      <div className="app-wrapper">
+        <PageTabs />
+        <main ref={wrapperRef} className="content-wrapper">
+          <div ref={lightRef} className="light-effect"></div>
+          <header className="page-header">
+            <h1 className="page-title">Warmup Checklist</h1>
+            <p className="page-description">Lock in!</p>
+          </header>
+          <WarmupList />
+        </main>
+      </div>
     </div>
   );
 }

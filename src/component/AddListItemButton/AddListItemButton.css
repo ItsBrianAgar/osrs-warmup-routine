@@ -11,6 +11,7 @@
   cursor: pointer;
   transition: box-shadow 300ms ease, border 300ms ease, color 300ms ease,
     background-color 300ms ease;
+  font-weight: 500;
 }
 
 .add-list-item-button:hover {

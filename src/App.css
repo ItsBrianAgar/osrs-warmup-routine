@@ -24,9 +24,12 @@
   z-index: 1;
 }
 
+.app-wrapper {
+  overflow: hidden;
+}
+
 .content-wrapper {
   position: relative;
-  overflow: hidden;
   background: rgba(225, 225, 255, 0.15);
   backdrop-filter: blur(3rem);
   -webkit-backdrop-filter: blur(3rem);
