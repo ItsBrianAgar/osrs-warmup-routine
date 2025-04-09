@@ -3,7 +3,6 @@ import "./App.css";
 import WarmupList from "./component/WarmupList/WarmupList";
 import TodoList from "./component/TodoList/TodoList"; // Import TodoList
 import PageTabs from "./component/PageTabs/PageTabs"; // Import PageTabs
-import fetchDailyImage from "./utils/storageUnsplashImage";
 import { Helmet } from "react-helmet";
 // hooks
 import useLightEffect from "./hooks/useLightEffect";
@@ -17,13 +16,6 @@ function App() {
   const [activeTab, setActiveTab] = useState("warmup"); // Default active tab
 
   // Load background image on mount
-  useEffect(() => {
-    fetchDailyImage().then((imageUrl) => {
-      if (imageUrl) {
-        setBackgroundImage(imageUrl);
-      }
-    });
-  }, []);
 
   // Load active tab from localStorage on mount
   useEffect(() => {
