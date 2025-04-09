@@ -90,6 +90,7 @@ const WarmupList = () => {
           <p>This list is empty.</p>
         </div>
       )}
+
       <ol className="warmup-list">
         {items.map((step) => (
           <li key={step} className="warmup-list-item">

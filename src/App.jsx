@@ -53,9 +53,7 @@ function App() {
               {activeTab === "warmup" ? "Warmup Checklist" : "Todo Planner"}
             </h1>
             <p className="page-description">
-              {activeTab === "warmup"
-                ? "Lock in!"
-                : "Plan your future OSRS adventures!"}
+              {activeTab === "warmup" ? "Lock in!" : "Plan your adventure!"}
             </p>
           </header>
           {/* Conditional Rendering Based on Active Tab */}
