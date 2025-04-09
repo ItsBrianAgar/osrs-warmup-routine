@@ -13,6 +13,7 @@ import favicon from "./favicon.png";
 function App() {
   const { lightRef, wrapperRef } = useLightEffect(0.01); // Adjust this value to change the follow speed (lower = slower)
   const [backgroundImage, setBackgroundImage] = useState("");
+  const [preferredBackground, setPreferredBackground] = useState("");
   const [activeTab, setActiveTab] = useState("warmup"); // Default active tab
 
   // Load background image on mount
@@ -38,7 +39,8 @@ function App() {
   }, [activeTab]);
 
   return (
-    <div className="App" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    // <div className="App" style={{ backgroundImage: `url(${backgroundImage})` }}>
+    <div className="App">
       <Helmet>
         <title>OSRS | Checklist</title>
         <link rel="icon" href={favicon} type="image/x-icon" />
