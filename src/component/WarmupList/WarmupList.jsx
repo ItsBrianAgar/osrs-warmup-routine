@@ -10,25 +10,21 @@ const WarmupList = () => {
   const [newItem, setNewItem] = useState("");
   const [isAddingNewItem, setIsAddingNewItem] = useState(false);
 
-  // Get today's date as a string
   const todayDate = new Date().toDateString();
 
-  // Load data from localStorage on mount
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("warmupChecklist"));
 
     if (storedData) {
+      setItems(storedData.items || warmupList);
+
       if (storedData.date === todayDate) {
-        // Load saved data if it's for today
-        setItems(storedData.items || warmupList);
         setCheckedItems(storedData.checkedItems || {});
       } else {
-        // Reset only checked items for a new day but keep the list
-        setItems(storedData.items || warmupList);
-        setCheckedItems({}); // Reset checked items for a new day
+        console.log("Date has changed; resetting checked items.");
+        setCheckedItems({});
       }
     } else {
-      // Initialize with default warmup list if no saved data exists
       setItems(warmupList);
       localStorage.setItem(
         "warmupChecklist",
@@ -37,16 +33,17 @@ const WarmupList = () => {
     }
   }, [todayDate]);
 
-  // Save data to localStorage whenever items or checkedItems change
   useEffect(() => {
-    localStorage.setItem(
-      "warmupChecklist",
-      JSON.stringify({
-        items,
-        checkedItems,
-        date: todayDate,
-      })
-    );
+    const currentData = JSON.parse(localStorage.getItem("warmupChecklist"));
+    const newData = JSON.stringify({
+      items,
+      checkedItems,
+      date: todayDate,
+    });
+
+    if (!currentData || JSON.stringify(currentData) !== newData) {
+      localStorage.setItem("warmupChecklist", newData);
+    }
   }, [items, checkedItems, todayDate]);
 
   const handleItemClick = (step) => {
@@ -84,7 +81,6 @@ const WarmupList = () => {
 
   return (
     <section className="warmup-list-wrapper">
-      {/* Empty State */}
       {items.length === 0 && (
         <div className="empty-state">
           <p>This list is empty.</p>
