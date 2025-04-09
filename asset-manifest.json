@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/osrs-warmup-routine/static/css/main.4c53c323.css",
-    "main.js": "/osrs-warmup-routine/static/js/main.62043f14.js",
+    "main.js": "/osrs-warmup-routine/static/js/main.13cb65fa.js",
     "static/js/453.f34aaf77.chunk.js": "/osrs-warmup-routine/static/js/453.f34aaf77.chunk.js",
     "index.html": "/osrs-warmup-routine/index.html",
     "main.4c53c323.css.map": "/osrs-warmup-routine/static/css/main.4c53c323.css.map",
-    "main.62043f14.js.map": "/osrs-warmup-routine/static/js/main.62043f14.js.map",
+    "main.13cb65fa.js.map": "/osrs-warmup-routine/static/js/main.13cb65fa.js.map",
     "453.f34aaf77.chunk.js.map": "/osrs-warmup-routine/static/js/453.f34aaf77.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4c53c323.css",
-    "static/js/main.62043f14.js"
+    "static/js/main.13cb65fa.js"
   ]
 }
