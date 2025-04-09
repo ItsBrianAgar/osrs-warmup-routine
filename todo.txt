@@ -1,0 +1,6 @@
+Update items to have {name & isChecked}
+
+[{name:birdhouse run, isChecked:false}, {name:birdhouse run, isChecked:false}]
+pos0, pos1
+
+15:17
