@@ -6,51 +6,48 @@ import AddListItemButton from "../AddListItemButton/AddListItemButton";
 
 const WarmupList = () => {
   const [checkedItems, setCheckedItems] = useState({});
-  const [currentDate, setCurrentDate] = useState(new Date().toDateString());
-  const [items, setItems] = useState(warmupList);
+  const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState("");
   const [isAddingNewItem, setIsAddingNewItem] = useState(false);
 
+  // Get today's date as a string
+  const todayDate = new Date().toDateString();
+
+  // Load data from localStorage on mount
   useEffect(() => {
-    const checkDate = () => {
-      const now = new Date();
-      const today = now.toDateString();
-      if (today !== currentDate) {
-        setCurrentDate(today);
-        setCheckedItems({}); // Reset checkedItems for new day
-        setItems(warmupList); // Reset items for new day
+    const storedData = JSON.parse(localStorage.getItem("warmupChecklist"));
+
+    if (storedData) {
+      if (storedData.date === todayDate) {
+        // Load saved data if it's for today
+        setItems(storedData.items || warmupList);
+        setCheckedItems(storedData.checkedItems || {});
+      } else {
+        // Reset checked items for a new day but keep the list
+        setItems(storedData.items || warmupList);
+        setCheckedItems({});
       }
-    };
-
-    checkDate(); // Check immediately on mount
-    const timer = setInterval(checkDate, 1000 * 60); // Check every minute
-
-    return () => clearInterval(timer);
-  }, [currentDate]);
-
-  useEffect(() => {
-    const storedData =
-      JSON.parse(localStorage.getItem("warmupChecklist")) || {};
-
-    if (storedData.date === currentDate) {
-      setCheckedItems(storedData.items || {});
-      setItems(storedData.list || warmupList);
     } else {
-      setCheckedItems({});
+      // Initialize with default warmup list if no saved data exists
       setItems(warmupList);
+      localStorage.setItem(
+        "warmupChecklist",
+        JSON.stringify({ items: warmupList, checkedItems: {}, date: todayDate })
+      );
     }
-  }, [currentDate]);
+  }, [todayDate]);
 
+  // Save data to localStorage whenever items or checkedItems change
   useEffect(() => {
     localStorage.setItem(
       "warmupChecklist",
       JSON.stringify({
-        date: currentDate,
-        items: checkedItems,
-        list: items,
+        items,
+        checkedItems,
+        date: todayDate,
       })
     );
-  }, [checkedItems, currentDate, items]);
+  }, [items, checkedItems, todayDate]);
 
   const handleItemClick = (step) => {
     setCheckedItems((prev) => ({
