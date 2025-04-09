@@ -1,10 +1,10 @@
-.warmup-list-wrapper {
+.todo-list-wrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.warmup-list {
+.todo-list {
   display: inline-flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -12,17 +12,16 @@
   padding: 0;
   text-align: left;
   line-height: 150%;
-  min-width: 30rem;
-  position: relative;
+  min-width: 30rem; /* Matches Warmup List width */
 }
 
-.warmup-list-item {
+.todo-list-item {
   color: rgba(255, 255, 255, 0.9);
   display: inline-flex;
   justify-content: space-between;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.75rem;
+  padding: 0 0.75rem;
   border-radius: 10px;
   transition: all 0.3s ease;
   background: rgba(255, 255, 255, 0.1);
@@ -33,40 +32,38 @@
   user-select: none;
 }
 
-.warmup-list-item-content {
+.todo-list-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.todo-list-item-content {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.75rem; /* Space between checkbox and text */
   flex-grow: 1;
 }
 
-.warmup-list-item:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.warmup-list-item-checkbox {
+.todo-list-item-checkbox {
   position: relative;
   height: 1.5rem;
   width: 1.5rem;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  appearance: none; /* Remove default checkbox styling */
+  -webkit-appearance: none; /* For Safari */
+  -moz-appearance: none; /* For Firefox */
   margin: 0;
-  border-radius: 4px;
+  border-radius: 4px; /* Rounded corners */
   background: rgba(255, 255, 255, 0.2);
   border: 2px solid rgba(255, 255, 255, 0.5);
   transition: all 0.3s ease;
   pointer-events: none;
 }
 
-.warmup-list-item-checkbox:checked {
+.todo-list-item-checkbox:checked {
   background-color: rgba(104, 154, 255, 0.8);
   border-color: rgba(104, 154, 255, 0.8);
 }
 
-.warmup-list-item-checkbox:checked::after {
+.todo-list-item-checkbox:checked::after {
   content: "\2714";
   position: absolute;
   top: 50%;
@@ -76,29 +73,27 @@
   font-size: 1rem;
 }
 
-.warmup-list-item-text {
-  font-size: 1rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  margin: 0;
-  flex: 1;
-  transition: all 0.3s ease;
+.todo-list-item-text {
+  font-size: 1rem; /* Matches Warmup List text size */
 }
 
-.warmup-list-item:has(.warmup-list-item-checkbox:checked) {
+.todo-list-item:has(.todo-list-item-checkbox:checked) {
   background: rgba(104, 154, 255, 0.2);
   border-color: rgba(231, 239, 255, 0.4);
 }
 
-.warmup-list-item:has(.warmup-list-item-checkbox:checked)
-  .warmup-list-item-text {
+.todo-list-item:has(.todo-list-item-checkbox:checked) .todo-list-item-text {
   color: rgb(219, 232, 255);
   opacity: 0.8;
 }
 
-.warmup-list-item.new-item {
-  background: rgba(255, 255, 255, 0.2);
+.todo-list-item.new-item {
+  padding: 0.75rem;
+}
+
+.todo-list-item.new-item > form,
+.todo-list-item.new-item > form > input {
+  width: 100%;
 }
 
 .new-item-input {
@@ -127,10 +122,17 @@
   transition: opacity 0.3s ease, color 0.3s ease;
 }
 
-.warmup-list-item:hover .remove-item-button {
+.todo-list-item:hover .remove-item-button {
   opacity: 1;
 }
 
 .remove-item-button:hover {
   color: rgba(255, 255, 255, 1);
+}
+
+/* Empty State Styling */
+.empty-state {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
+  font-style: italic;
 }

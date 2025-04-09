@@ -20,7 +20,7 @@ const useLightEffect = (ease = 0.1) => {
     };
 
     const handleMouseEnter = () => {
-      lightEffect.style.opacity = "1";
+      lightEffect.style.opacity = ".5";
     };
 
     const handleMouseLeave = () => {

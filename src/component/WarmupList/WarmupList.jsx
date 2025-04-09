@@ -23,9 +23,9 @@ const WarmupList = () => {
         setItems(storedData.items || warmupList);
         setCheckedItems(storedData.checkedItems || {});
       } else {
-        // Reset checked items for a new day but keep the list
+        // Reset only checked items for a new day but keep the list
         setItems(storedData.items || warmupList);
-        setCheckedItems({});
+        setCheckedItems({}); // Reset checked items for a new day
       }
     } else {
       // Initialize with default warmup list if no saved data exists
@@ -84,6 +84,12 @@ const WarmupList = () => {
 
   return (
     <section className="warmup-list-wrapper">
+      {/* Empty State */}
+      {items.length === 0 && (
+        <div className="empty-state">
+          <p>This list is empty.</p>
+        </div>
+      )}
       <ol className="warmup-list">
         {items.map((step) => (
           <li key={step} className="warmup-list-item">

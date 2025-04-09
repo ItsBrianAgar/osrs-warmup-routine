@@ -101,6 +101,11 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
+.warmup-list-item.new-item > form,
+.warmup-list-item.new-item > form > input {
+  width: 100%;
+}
+
 .new-item-input {
   width: 100%;
   background: transparent;

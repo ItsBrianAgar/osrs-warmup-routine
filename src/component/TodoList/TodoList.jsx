@@ -1,58 +1,38 @@
 import React, { useState, useEffect } from "react";
-import "./WarmupList.css";
-import warmupList from "../../data/warmupList";
-import DateIndicator from "../DateIndicator/DateIndicator";
+import "./TodoList.css";
 import AddListItemButton from "../AddListItemButton/AddListItemButton";
+import DateIndicator from "../DateIndicator/DateIndicator";
 
-const WarmupList = () => {
-  const [checkedItems, setCheckedItems] = useState({});
+const TodoList = () => {
   const [items, setItems] = useState([]);
+  const [checkedItems, setCheckedItems] = useState({});
   const [newItem, setNewItem] = useState("");
   const [isAddingNewItem, setIsAddingNewItem] = useState(false);
 
-  // Get today's date as a string
-  const todayDate = new Date().toDateString();
-
   // Load data from localStorage on mount
   useEffect(() => {
-    const storedData = JSON.parse(localStorage.getItem("warmupChecklist"));
-
+    const storedData = JSON.parse(localStorage.getItem("todoChecklist"));
     if (storedData) {
-      if (storedData.date === todayDate) {
-        // Load saved data if it's for today
-        setItems(storedData.items || warmupList);
-        setCheckedItems(storedData.checkedItems || {});
-      } else {
-        // Reset checked items for a new day but keep the list
-        setItems(storedData.items || warmupList);
-        setCheckedItems({});
-      }
-    } else {
-      // Initialize with default warmup list if no saved data exists
-      setItems(warmupList);
-      localStorage.setItem(
-        "warmupChecklist",
-        JSON.stringify({ items: warmupList, checkedItems: {}, date: todayDate })
-      );
+      setItems(storedData.items || []);
+      setCheckedItems(storedData.checkedItems || {});
     }
-  }, [todayDate]);
+  }, []);
 
   // Save data to localStorage whenever items or checkedItems change
   useEffect(() => {
     localStorage.setItem(
-      "warmupChecklist",
+      "todoChecklist",
       JSON.stringify({
         items,
         checkedItems,
-        date: todayDate,
       })
     );
-  }, [items, checkedItems, todayDate]);
+  }, [items, checkedItems]);
 
-  const handleItemClick = (step) => {
+  const handleItemClick = (item) => {
     setCheckedItems((prev) => ({
       ...prev,
-      [step]: !prev[step],
+      [item]: !prev[item], // Toggle the checked state for the item
     }));
   };
 
@@ -83,38 +63,45 @@ const WarmupList = () => {
   };
 
   return (
-    <section className="warmup-list-wrapper">
-      <ol className="warmup-list">
-        {items.map((step) => (
-          <li key={step} className="warmup-list-item">
+    <section className="todo-list-wrapper">
+      {/* Empty State */}
+      {items.length === 0 && (
+        <div className="empty-state">
+          <p>This list is empty.</p>
+        </div>
+      )}
+
+      <ol className="todo-list">
+        {items.map((item) => (
+          <li key={item} className="todo-list-item">
             <div
-              className="warmup-list-item-content"
-              onClick={() => handleItemClick(step)}
+              className="todo-list-item-content"
+              onClick={() => handleItemClick(item)}
             >
               <input
-                className="warmup-list-item-checkbox"
+                className="todo-list-item-checkbox"
                 type="checkbox"
-                checked={checkedItems[step] || false}
+                checked={checkedItems[item] || false}
                 readOnly
               />
-              <p className="warmup-list-item-text">{step}</p>
+              <p className="todo-list-item-text">{item}</p>
             </div>
             <button
               className="remove-item-button"
-              onClick={() => handleRemoveItem(step)}
+              onClick={() => handleRemoveItem(item)}
             >
               &times;
             </button>
           </li>
         ))}
         {isAddingNewItem && (
-          <li className="warmup-list-item new-item">
+          <li className="todo-list-item new-item">
             <form onSubmit={handleNewItemSubmit}>
               <input
                 type="text"
                 value={newItem}
                 onChange={handleNewItemChange}
-                placeholder="Enter new item"
+                placeholder="Enter new event"
                 className="new-item-input"
                 autoFocus
               />
@@ -128,4 +115,4 @@ const WarmupList = () => {
   );
 };
 
-export default WarmupList;
+export default TodoList;
